@@ -6,6 +6,7 @@ public class PlayerController : MonoBehaviour {
 
 	public float speed;
 	public Rigidbody PlayerRb;
+	private int score = 0;
 	// Use this for initialization
 	void Start () {
 
@@ -30,5 +31,14 @@ public class PlayerController : MonoBehaviour {
 		if (Input.GetKey("right")) {
 			PlayerRb.AddForce(speed * Time.deltaTime ,0 ,0);
 		}
+	}
+
+	void OnTriggerEnter(Collider other) {
+		if (other.CompareTag("Pickup"))
+        {
+			score ++;
+            Debug.Log("Score: " + score);
+			Destroy(other.gameObject);
+        }
 	}
 }
